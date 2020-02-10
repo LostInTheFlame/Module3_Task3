@@ -7,24 +7,22 @@ namespace Task3
         static void Main(string[] args)
         {
             Console.Write("Введите число элементов ряда Фибоначчи n: ");
-            string N = Console.ReadLine();
+            string n = Console.ReadLine();
 
-            if (int.TryParse(N, out int n) && n > 0)
+            if (int.TryParse(n, out int parsedN) && parsedN > 0)
             {
-                ulong[] array = new ulong[n + 2];
-                array[0] = 0;
-                array[1] = 1;
-                for (int i = 0; i <= n - 1; i++)
+                for (int i = 1; i <= parsedN; i++)
                 {
-                    array[i + 2] = array[i] + array[i + 1];
-                    Console.WriteLine(array[i]);
+                    int numberFibonachi = Fibonachi(i);
+                    Console.WriteLine(numberFibonachi);
                 }
                 Console.Write("\nВведите номер интересующего элемента ряда Фибоначчи: ");
                 string number = Console.ReadLine();
-                
-                if (int.TryParse(number, out int Number) && Number > 0 && Number <= n)
+
+                if (int.TryParse(number, out int parsedNumber) && parsedNumber > 0 && parsedNumber <= parsedN)
                 {
-                    Console.WriteLine($"\n{number} элемент ряда Фибоначчи: {array[Number - 1]}");
+                    int num = Fibonachi(parsedNumber);
+                    Console.WriteLine($"\n{parsedNumber} элемент ряда Фибоначчи: {num}");
                 }
                 else
                 {
@@ -36,6 +34,18 @@ namespace Task3
                 Console.WriteLine("Значение введено неверно.");
             }
             Console.ReadKey(true);
+        }
+
+        static int Fibonachi(int n)
+        {
+            if (n == 1 || n == 2)
+            {
+                return n-1;
+            }
+            else
+            {
+                return Fibonachi(n - 1) + Fibonachi(n - 2);
+            }
         }
     }
 }
